@@ -11,8 +11,8 @@ La real herencia de prototipos, es definida por el estandar ECMAScript 5, la cua
 'Object.create' crea un objeto que tiene un prototipo especificado y opcionalmente contiene propiedades especificas.
 
 
-'Object.create' tambien nos permite implementar facilmente el concepto de la herencia diferencial donde los objetos son capaces de heredar directamente de otros objetos.
-'Object.create' nos permite inicializar las propiedades del objeto utilizando el segundo parametro.Por ejemplo:
+```js Object.create``` tambien nos permite implementar facilmente el concepto de la herencia diferencial donde los objetos son capaces de heredar directamente de otros objetos.
+```js Object.create``` nos permite inicializar las propiedades del objeto utilizando el segundo parametro.Por ejemplo:
 ```js
 var Persona = {
 	getNombre : function(){
@@ -27,5 +27,27 @@ var pedro = Object.create(Persona,{
 });
 
 pedro.getNombre()
-});
+```
+Podemos usar el patron prototype sin utilizar directamente el
+```js Object.create ```, simulando el patron de acuerdo con el ejemplo anterior seria asi:
+```js
+var personaPrototype = {
+	init:function(nombre){
+		this.nombre = nombre;
+	},
+	getNombre : function(){
+		console.log("mi nombre es "+this.nombre);
+	}
+};
+
+function Persona(nombre){
+	function P(){};
+	P.prototype = personaPrototype;
+	var f = new P();
+	f.init(nombre);
+	return f;
+};
+
+var pedro = Persona("pedro");
+pedro.getNombre();
 ```
