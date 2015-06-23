@@ -6,13 +6,16 @@ Del patron prototype podemos decir que se centra en la creación de objetos que 
 
 La herencia de prototipos evita el uso de clases por completo, ventaja la cual podemos encontrar nativamente atraves de prototipos en lugar de tratar de imitar caracteristicas de otros lenguajes.
 
-La real herencia de prototipos, es definida por el estandar ECMAScript 5, la cual requiere el uso de 'Object.create'.
+La verdadera herencia de prototipos, es definida por el estandar ECMAScript 5, la cual requiere el uso de  ```Object.create```.
 
-'Object.create' crea un objeto que tiene un prototipo especificado y opcionalmente contiene propiedades especificas.
+####Prototype
+objeto que proporciona propiedades compartidas por otros objetos.
+
+```Object.create``` crea un objeto que tiene un prototipo especificado y opcionalmente contiene propiedades especificas.
 
 
-```js Object.create``` tambien nos permite implementar facilmente el concepto de la herencia diferencial donde los objetos son capaces de heredar directamente de otros objetos.
-```js Object.create``` nos permite inicializar las propiedades del objeto utilizando el segundo parametro.Por ejemplo:
+```Object.create``` tambien nos permite implementar facilmente el concepto de la herencia diferencial donde los objetos son capaces de heredar directamente de otros objetos.
+```Object.create``` nos permite inicializar las propiedades del objeto utilizando el segundo parametro.Por ejemplo:
 ```js
 var Persona = {
 	getNombre : function(){
@@ -29,7 +32,7 @@ var pedro = Object.create(Persona,{
 pedro.getNombre()
 ```
 Podemos usar el patron prototype sin utilizar directamente el
-```js Object.create ```, simulando el patron de acuerdo con el ejemplo anterior seria asi:
+```Object.create ```, simulando el patron de acuerdo con el ejemplo anterior seria asi:
 ```js
 var personaPrototype = {
 	init:function(nombre){
@@ -50,4 +53,25 @@ function Persona(nombre){
 
 var pedro = Persona("pedro");
 pedro.getNombre();
+```
+Otra forma de implementación del patron prototype podria ser la siguiente:
+```js
+var vehiculoEsqueleto = function(){
+	this.getTipo = function(){
+		console.log("Tipo de vehiculo: "+this.tipo)
+	};
+
+	this.getMarca = function(){
+		console.log("Marca de vehiculo: "+this.marca)
+	};
+};
+
+var vehiculo = function(tipo,marca){
+	this.tipo=tipo;
+	this.marca=marca;
+};
+
+vehiculo.prototype = new vehiculoEsqueleto();
+
+var testVehiculo = new vehiculo("terrestre","audi");
 ```
