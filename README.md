@@ -8,14 +8,26 @@ La herencia de prototipos evita el uso de clases por completo, ventaja la cual p
 
 La verdadera herencia de prototipos, es definida por el estandar ECMAScript 5, la cual requiere el uso de  ```Object.create```.
 
-####Prototype
-objeto que proporciona propiedades compartidas por otros objetos.
+####Objecto prototype
+Objeto que proporciona propiedades compartidas por otros objetos.
+```js
+function demoPrototype(){
+	//-- 
+}
+/* creando una propiedad nueva del objecto prototype la cual podra ser compartida en otros objetos */
+demoPrototype.prototype.saludo = "saludo!";
 
-```Object.create``` crea un objeto que tiene un prototipo especificado y opcionalmente contiene propiedades especificas.
+/* instanciando demoPrototype */
+var test1 = new demoPrototype();
+var test2 = new demoPrototype();
+/* ambos objetos contienen la misma propiedad saludo que fue definida en el prototype de demoPrototype */
+test1.saludo
+test2.saludo
+```
+####Object.create
+Crea un objeto que tiene un prototipo especificado y opcionalmente contiene propiedades especificas, tambien nos permite implementar facilmente el concepto de la herencia diferencial donde los objetos son capaces de heredar directamente de otros objetos.
 
-
-```Object.create``` tambien nos permite implementar facilmente el concepto de la herencia diferencial donde los objetos son capaces de heredar directamente de otros objetos.
-```Object.create``` nos permite inicializar las propiedades del objeto utilizando el segundo parametro.Por ejemplo:
+Como tambien nos permite inicializar las propiedades del objeto utilizando el segundo parametro.Por ejemplo:
 ```js
 var Persona = {
 	getNombre : function(){
@@ -29,7 +41,7 @@ var pedro = Object.create(Persona,{
     }
 });
 
-pedro.getNombre()
+pedro.getNombre();
 ```
 Podemos usar el patron prototype sin utilizar directamente el
 ```Object.create ```, simulando el patron de acuerdo con el ejemplo anterior seria asi:
@@ -54,7 +66,7 @@ function Persona(nombre){
 var pedro = Persona("pedro");
 pedro.getNombre();
 ```
-Otra forma de implementación del patron prototype podria ser la siguiente:
+Otra forma de implementación del patron prototype:
 ```js
 var vehiculoEsqueleto = function(){
 	this.getTipo = function(){
@@ -74,4 +86,6 @@ var vehiculo = function(tipo,marca){
 vehiculo.prototype = new vehiculoEsqueleto();
 
 var testVehiculo = new vehiculo("terrestre","audi");
+testVehiculo.getTipo();
+testVehiculo.getMarca();
 ```
