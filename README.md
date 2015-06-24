@@ -1,4 +1,4 @@
-PATRON PROTOTYPE 
+PATRON PROTOTYPE
 ===================
 Continuando la saga de los post sobre patrones de diseño en javaScript, en este hablaremos del patron prototype.
 
@@ -6,13 +6,12 @@ Del patron prototype podemos decir que se centra en la creación de objetos que 
 
 La herencia de prototipos evita el uso de clases por completo, ventaja la cual podemos encontrar nativamente atraves de prototipos en lugar de tratar de imitar caracteristicas de otros lenguajes.
 
-La verdadera herencia de prototipos, es definida por el estandar ECMAScript 5, la cual requiere el uso de  ```Object.create```.
-
 ####Objecto prototype
 Objeto que proporciona propiedades compartidas por otros objetos.
+Cada objeto está vinculado a un objeto ```prototype``` de la que puede heredar propiedades.Todos los objetos creados a partir de objetos literales están vinculados a ```Object.prototype```.
 ```js
 function demoPrototype(){
-	//-- 
+	//--
 }
 /* creando una propiedad nueva del objecto prototype la cual podra ser compartida en otros objetos */
 demoPrototype.prototype.saludo = "saludo!";
